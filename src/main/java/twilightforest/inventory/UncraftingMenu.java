@@ -1,6 +1,8 @@
 package twilightforest.inventory;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
@@ -20,11 +22,9 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRules;
-import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import twilightforest.TwilightForestMod;
+import twilightforest.TFMain;
 import twilightforest.config.TFConfig;
 import twilightforest.tags.TFItemTags;
 import twilightforest.init.TFBlocks;
@@ -70,7 +70,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 	}
 
 	public UncraftingMenu(int id, Inventory inventory, Level level, ContainerLevelAccess positionData) {
-		super(TFMenuTypes.UNCRAFTING.get(), id, 3, 3);
+		super(TFMenuTypes.UNCRAFTING, id, 3, 3);
 
 		this.positionData = positionData;
 		this.level = level;
@@ -105,7 +105,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 
 		this.slotsChanged(this.craftSlots);
 
-		if (!FMLEnvironment.isProduction()) {
+		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
 			// Debug slot listing
 			NonNullList<Slot> slots = this.slots;
 
@@ -115,7 +115,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 				joiner.add("[index " + slot.index + ": " + slot.getClass().getName() + " (container slot: " + slot.getContainerSlot() + ")]");
 			}
 
-			TwilightForestMod.LOGGER.info(joiner.toString());
+			TFMain.LOGGER.info(joiner.toString());
 		}
 	}
 
@@ -321,7 +321,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 	}
 
 	private static List<RecipeHolder<CraftingRecipe>> getRecipesFor(CraftingInput input, ServerLevel level) {
-		return level.recipeAccess().recipeMap().getRecipesFor(RecipeType.CRAFTING, input, level).toList();
+		return level.recipeAccess().recipes.getRecipesFor(RecipeType.CRAFTING, input, level).toList();
 	}
 
 	private void chooseRecipe(CraftingInput input) {
@@ -364,19 +364,19 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 		if (inputStack.is(ItemTags.SWORDS) && resultStack.is(ItemTags.SWORDS)) {
 			return true;
 		}
-		if (inputStack.is(Tags.Items.TOOLS_BOW) && resultStack.is(Tags.Items.TOOLS_BOW)) {
+		if (inputStack.is(ConventionalItemTags.BOW_TOOLS) && resultStack.is(ConventionalItemTags.BOW_TOOLS)) {
 			return true;
 		}
-		if (inputStack.is(Tags.Items.TOOLS_CROSSBOW) && resultStack.is(Tags.Items.TOOLS_CROSSBOW)) {
+		if (inputStack.is(ConventionalItemTags.CROSSBOW_TOOLS) && resultStack.is(ConventionalItemTags.CROSSBOW_TOOLS)) {
 			return true;
 		}
-		if (inputStack.is(Tags.Items.TOOLS_FISHING_ROD) && resultStack.is(Tags.Items.TOOLS_FISHING_ROD)) {
+		if (inputStack.is(ConventionalItemTags.FISHING_ROD_TOOLS) && resultStack.is(ConventionalItemTags.FISHING_ROD_TOOLS)) {
 			return true;
 		}
 
 		//TODO: best that can be done for instanceof ArmorItem
 		if (inputStack.has(DataComponents.EQUIPPABLE) && resultStack.has(DataComponents.EQUIPPABLE)) {
-			if (inputStack.is(Tags.Items.ARMORS_HUMANOID) && inputStack.is(Tags.Items.ARMORS_HUMANOID)) {
+			if (inputStack.is(ConventionalItemTags.HUMANOID_ARMORS) && inputStack.is(ConventionalItemTags.HUMANOID_ARMORS)) {
 				return inputStack.get(DataComponents.EQUIPPABLE).slot() == resultStack.get(DataComponents.EQUIPPABLE).slot();
 			}
 		}
@@ -609,7 +609,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 		ItemStack[] stacks = new ItemStack[ingredients.size()];
 
 		for (int i = 0; i < ingredients.size(); i++) {
-			ItemStack[] matchingStacks = ingredients.get(i).getValues().stream().filter(s -> !s.is(TFItemTags.BANNED_UNCRAFTING_INGREDIENTS)).map(p -> new ItemStack(p.value())).toArray(ItemStack[]::new);
+			ItemStack[] matchingStacks = ingredients.get(i).values.stream().filter(s -> !s.is(TFItemTags.BANNED_UNCRAFTING_INGREDIENTS)).map(p -> new ItemStack(p.value())).toArray(ItemStack[]::new);
 			stacks[i] = matchingStacks.length > 0 ? matchingStacks[Math.floorMod(this.ingredientsInCycle, matchingStacks.length)] : ItemStack.EMPTY;
 		}
 
@@ -618,7 +618,7 @@ public class UncraftingMenu extends AbstractCraftingMenu {
 
 	@Override
 	public boolean stillValid(Player player) {
-		return !TFConfig.disableEntireTable && stillValid(this.positionData, player, TFBlocks.UNCRAFTING_TABLE.get());
+		return !TFConfig.disableEntireTable && stillValid(this.positionData, player, TFBlocks.UNCRAFTING_TABLE);
 	}
 
 	@Override

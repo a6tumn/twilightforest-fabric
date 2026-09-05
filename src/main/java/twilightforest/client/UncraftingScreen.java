@@ -1,5 +1,6 @@
 package twilightforest.client;
 
+import carminite.network.ClientPacketDistributor;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
@@ -26,8 +27,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import twilightforest.TwilightForestMod;
+import twilightforest.TFMain;
 import twilightforest.config.TFConfig;
 import twilightforest.tags.TFItemTags;
 import twilightforest.inventory.UncraftingMenu;
@@ -36,7 +36,7 @@ import twilightforest.network.UncraftingGuiPacket;
 import java.util.List;
 
 public class UncraftingScreen extends AbstractRecipeBookScreen<UncraftingMenu> {
-	private static final Identifier TEXTURE = TwilightForestMod.getGuiTexture("guigoblintinkering.png");
+	private static final Identifier TEXTURE = TFMain.getGuiTexture("guigoblintinkering.png");
 
 	public UncraftingScreen(UncraftingMenu container, Inventory player, Component name) {
 		super(container, new CraftingRecipeBookComponent(container), player, name);

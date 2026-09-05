@@ -297,6 +297,11 @@ accessible field net/minecraft/client/renderer/LevelRenderer ticks I
 # MultipartRenderDispatcher
 accessible method net/minecraft/client/renderer/LevelRenderer shouldShowEntityOutlines ()Z
 
+# UncraftingMenu
+accessible field net/minecraft/world/item/crafting/ShapedRecipe pattern Lnet/minecraft/world/item/crafting/ShapedRecipePattern;
+accessible field net/minecraft/world/item/crafting/RecipeManager recipes Lnet/minecraft/world/item/crafting/RecipeMap;
+accessible field net/minecraft/world/item/crafting/Ingredient values Lnet/minecraft/core/HolderSet;
+
 # Enum Extensions
 extend-enum net/minecraft/world/damagesource/DamageEffects TWILIGHTFOREST_PINCH
 extend-enum net/minecraft/world/item/Rarity TWILIGHTFOREST_TWILIGHT
