@@ -74,7 +74,7 @@ public class TwilightForestRenderInfo {
 	}
 
 	public boolean renderSnowAndRain(MultiBufferSource bufferSource, Vec3 camPos) {
-		return TFWeatherRenderer.renderSnowAndRain(Minecraft.getInstance().level, Minecraft.getInstance().levelRenderer.ticks, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaTicks(), camPos, bufferSource);
+		return TFWeatherRenderer.renderSnowAndRain(Minecraft.getInstance().level, Minecraft.getInstance().levelRenderer.ticks, Minecraft.getInstance().getDeltaTracker().getGameTimeDeltaPartialTick(false), camPos, bufferSource);
 	}
 
 	public boolean tickRain(ClientLevel level, int ticks, Camera camera) {
