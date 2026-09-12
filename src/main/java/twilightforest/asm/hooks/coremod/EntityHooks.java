@@ -32,7 +32,7 @@ public final class EntityHooks {
 		return !livingEntity.canStandOnFluid(livingEntity.level().getFluidState(livingEntity.blockPosition())) && isInWater;
 	}
 
-	public static BiPredicate<FluidType, Double> unrestrainedSwimPredicate(BiPredicate<FluidType, Double> o, LivingEntity livingEntity) {
+	/*public static BiPredicate<FluidType, Double> unrestrainedSwimPredicate(BiPredicate<FluidType, Double> o, LivingEntity livingEntity) {
 		return (fluidType, height) -> {
 			FluidState fs = livingEntity.level().getFluidState(livingEntity.blockPosition());
 			boolean oResult = o.test(fluidType, height);
@@ -40,7 +40,7 @@ public final class EntityHooks {
 				return oResult;
 			return unrestrainedSprintingInWater(oResult, livingEntity);
 		};
-	}
+	}*/
 
 	public static boolean overrideStayCloseToHolder(boolean prior, PathfinderMob mob) {
 		return prior && !mob.hasAttached(TFDataAttachments.LEASH_PATHFINDER_OVERRIDE);

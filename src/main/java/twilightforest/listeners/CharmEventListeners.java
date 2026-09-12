@@ -1,6 +1,6 @@
 package twilightforest.listeners;
 
-import net.minecraft.core.BlockPos;
+/*import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -283,9 +283,7 @@ public class CharmEventListeners {
 		}
 	}
 
-	/**
-	 * Maybe we kept some stuff for the player!
-	 */
+
 	private static void returnStoredItems(Player player) {
 
 		TFCommon.LOGGER.debug("Player {} ({}) respawned and received items held in storage", player.getName().getString(), player.getUUID());
@@ -345,4 +343,4 @@ public class CharmEventListeners {
 
 		return false;
 	}
-}
+}*/

@@ -19,7 +19,7 @@ import twilightforest.init.TFDataAttachments;
 import twilightforest.init.TFDataComponents;
 import twilightforest.init.custom.TravellersModifiersManager;
 
-public final class TravellersArmorRenderer extends TFArmorRenderer {
+/*public final class TravellersArmorRenderer extends TFArmorRenderer {
 	public TravellersArmorRenderer() {
 		super(TFModelLayers.TRAVELLERS_ARMOR_HELMET, TFModelLayers.TRAVELLERS_ARMOR_CHEST_GLOVES, TFModelLayers.TRAVELLERS_ARMOR_CHEST_GLOVES_SLIM, TFModelLayers.TRAVELLERS_ARMOR_LEGGINGS, TFModelLayers.TRAVELLERS_ARMOR_BOOTS);
 	}
@@ -88,4 +88,4 @@ public final class TravellersArmorRenderer extends TFArmorRenderer {
 		if (model instanceof PlayerModel player) return player.slim;
 		return false;
 	}
-}
+}*/
