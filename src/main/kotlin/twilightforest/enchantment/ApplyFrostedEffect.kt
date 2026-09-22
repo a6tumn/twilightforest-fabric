@@ -24,14 +24,12 @@ data class ApplyFrostedEffect(
 	val amplifier: LevelBasedValue
 ) : EnchantmentEntityEffect {
 	companion object {
-		@JvmField
 		val CODEC: MapCodec<ApplyFrostedEffect> = RecordCodecBuilder.mapCodec(Function { instance: RecordCodecBuilder.Instance<ApplyFrostedEffect> -> instance.group(
 				LevelBasedValue.CODEC.fieldOf("duration").forGetter(ApplyFrostedEffect::duration),
 				LevelBasedValue.CODEC.fieldOf("amplifier").forGetter(ApplyFrostedEffect::amplifier)
 			).apply(instance) { duration: LevelBasedValue, amplifier: LevelBasedValue -> ApplyFrostedEffect(duration, amplifier) }
 		})
 
-		@JvmStatic
 		fun doChillAuraEffect(victim: LivingEntity, duration: Int, amplifier: Int, shouldHit: Boolean) {
 			if (shouldHit && !victim.`is`(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
 				if (!victim.getItemBySlot(EquipmentSlot.HEAD).`is`(ItemTags.FREEZE_IMMUNE_WEARABLES)

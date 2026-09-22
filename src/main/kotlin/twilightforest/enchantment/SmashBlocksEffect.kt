@@ -32,7 +32,6 @@ data class SmashBlocksEffect(
 	val smashSound: Optional<Holder<SoundEvent>>
 ) : EnchantmentEntityEffect {
 	companion object {
-		@JvmField
 		val CODEC: MapCodec<SmashBlocksEffect> = RecordCodecBuilder.mapCodec(Function { instance: RecordCodecBuilder.Instance<SmashBlocksEffect> -> instance.group(
 				LevelBasedValue.CODEC.fieldOf("max_smash").forGetter(SmashBlocksEffect::maxSmash),
 				LevelBasedValue.CODEC.fieldOf("radius").forGetter(SmashBlocksEffect::radius),

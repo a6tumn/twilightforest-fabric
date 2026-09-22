@@ -89,7 +89,6 @@ object TFCommon : ModInitializer{
 	private const val GUI_DIR = "textures/gui/"
 	private const val ENVIRO_DIR = "textures/environment/"
 
-	@JvmField
 	val LOGGER: Logger = LoggerFactory.getLogger(ID)
 
 	override fun onInitialize() {
@@ -854,22 +853,18 @@ object TFCommon : ModInitializer{
 		)
 	}
 
-	@JvmStatic
 	fun prefix(name: String): Identifier {
 		return Identifier.fromNamespaceAndPath(ID, name.lowercase())
 	}
 
-	@JvmStatic
 	fun getModelTexture(name: String?): Identifier {
 		return Identifier.fromNamespaceAndPath(ID, MODEL_DIR + name)
 	}
 
-	@JvmStatic
 	fun getGuiTexture(name: String?): Identifier {
 		return Identifier.fromNamespaceAndPath(ID, GUI_DIR + name)
 	}
 
-	@JvmStatic
 	fun getEnvTexture(name: String?): Identifier {
 		return Identifier.fromNamespaceAndPath(ID, ENVIRO_DIR + name)
 	}

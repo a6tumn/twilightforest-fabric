@@ -16,10 +16,8 @@ import twilightforest.item.recipe.ScepterRepairRecipe
 
 class RechargeScepterEffect : EnchantmentEntityEffect{
 	companion object {
-		@JvmField
 		val CODEC: MapCodec<RechargeScepterEffect> = MapCodec.unit { RechargeScepterEffect() }
 
-		@JvmStatic
 		fun applyRecharge(level: ServerLevel, item: ItemStack, entity: Entity) {
 			if (entity is Player && item.damageValue == item.maxDamage) {
 				val recipes: List<ScepterRepairRecipe> = level.recipeAccess().recipes.values().stream().filter { holder -> holder.value() is ScepterRepairRecipe }.map { holder -> holder.value() }.map { value -> value as ScepterRepairRecipe }.toList()

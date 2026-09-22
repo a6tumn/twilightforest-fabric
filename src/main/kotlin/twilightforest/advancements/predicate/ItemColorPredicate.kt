@@ -17,7 +17,6 @@ data class ItemColorPredicate(val color: Int) : SingleComponentItemPredicate<Dye
 			).apply(instance, ::ItemColorPredicate)
 		}
 
-		@JvmField
 		val TYPE = DataComponentPredicate.ConcreteType(CODEC)
 
 		fun anyColor(): ItemColorPredicate = ItemColorPredicate(-1)

@@ -11,7 +11,6 @@ import kotlin.math.min
 
 class FrostedEffect : MobEffect(MobEffectCategory.HARMFUL, 0x56CBFD) {
 	companion object {
-		@JvmField
 		val MOVEMENT_SPEED_MODIFIER = TFCommon.prefix("frosted_slowdown")
 		const val FROST_MULTIPLIER = -0.15
 	}
