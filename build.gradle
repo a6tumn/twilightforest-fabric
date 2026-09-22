@@ -2,6 +2,7 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 
 plugins {
+	id 'org.jetbrains.kotlin.jvm' version "${kotlin_version}"
 	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
@@ -84,6 +85,7 @@ dependencies {
 	minecraft "com.mojang:minecraft:${minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
+	implementation "net.fabricmc:fabric-language-kotlin:${fabric_language_kotlin_version}+kotlin.${kotlin_version}"
 
 	// NeoForge Config API
 	include(implementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${forge_config_api_port_version}")
@@ -100,6 +102,7 @@ dependencies {
 def minimum_loader_version = project.property("minimum_loader_version")
 def base_minecraft_version = project.property("base_minecraft_version")
 def minimum_fabric_api_version = project.property("minimum_fabric_api_version")
+def fabric_language_kotlin_version = project.property("fabric_language_kotlin_version")
 def java_version = java.toolchain.languageVersion.get().asInt()
 
 processResources {
@@ -113,6 +116,7 @@ processResources {
 			"loader_version"      : minimum_loader_version,
 			"minecraft_version"   : base_minecraft_version,
 			"fabric_api_version"  : minimum_fabric_api_version,
+			"fabric_language_kotlin_version": fabric_language_kotlin_version,
 			"java_version"        : java_version
 		])
 	}
